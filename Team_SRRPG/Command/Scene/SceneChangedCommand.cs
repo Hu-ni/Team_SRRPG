@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Team_SRRPG.Command.Interface;
 using Team_SRRPG.DTO;
+using Team_SRRPG.DTO.Factory;
 using Team_SRRPG.Event;
 
 namespace Team_SRRPG.Command.Scene
@@ -21,9 +22,10 @@ namespace Team_SRRPG.Command.Scene
             _bus = bus;
         }
 
+        // 
         public void Execute()
         {
-            var dto = _dtoFactory.CreateDto(_nextIndex);
+            var dto = DTOFactory.Instance.CreateSceneDTO(_nextIndex);
             _bus.PublishSceneChange(_nextIndex, dto);
         }
     }

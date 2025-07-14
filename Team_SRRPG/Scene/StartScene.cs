@@ -6,20 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Team_SRRPG.DTO;
+using Team_SRRPG.Model;
 using Team_SRRPG.Scene.Interface;
 using Team_SRRPG.Service;
 
 namespace Team_SRRPG.Scene
 {
-    public class StartScene : IScene
+    public class StartScene : SceneData, IScene
     {
-        private ICommand command;
-
-        private IEmptyDTO data;
+        
+        private Dictionary<int, ICommand> _commands;
 
         public StartScene(IEmptyDTO data)
-        {
-            this.data = data;
+        { 
+            StartSceneDTO dto = data as StartSceneDTO;
+            base(dto);
         }
 
         public void Render(IEmptyDTO dto)
@@ -31,7 +32,7 @@ namespace Team_SRRPG.Scene
 
         public void HandleInput()
         {
-            InputManager.Instance.SelectOptionAsync(new List<string> { "시작하기", "종료하기" });
+            //InputManager.Instance.SelectOptionAsync(new List<string> { "시작하기", "종료하기" });
             int input = InputManager.Instance.ReadLineIntInRange(1, 2); // 입력을 받음.
             switch (input)
             {

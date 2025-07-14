@@ -17,20 +17,18 @@ namespace Team_SRRPG.Scene
         // 누구는 씬 제작, 누구는 인벤토리 제작하면서 
         // PH_InventoryScene
         // PH_Command
-        private readonly SceneFactory _sceneFactory;
         private readonly ISceneEventBus _eventBus;
 
         private IScene _currentScene;
         private IEmptyDTO _currentDto;
 
-        public SceneManager(SceneFactory sceneFactory, ISceneEventBus eventBus, int startSceneIndex, IEmptyDTO startDto)
+        public SceneManager(ISceneEventBus eventBus, int startSceneIndex, IEmptyDTO startDto)
         {
-            _sceneFactory = sceneFactory;
             _eventBus = eventBus;
 
             // 초기 씬/DTO 설정
             _currentDto = startDto;
-            _currentScene = _sceneFactory.Create(startSceneIndex, _currentDto);
+            _currentScene = SceneFactory.Instance.Create(startSceneIndex, _currentDto);
 
             // 이벤트 구독
             _eventBus.OnSceneChange += OnSceneChange;
@@ -41,7 +39,7 @@ namespace Team_SRRPG.Scene
         /// </summary>
         private void OnSceneChange(int nextSceneIndex, IEmptyDTO nextDto)
         {
-            _currentScene = _sceneFactory.Create(nextSceneIndex, nextDto);
+            _currentScene = SceneFactory.Instance.Create(nextSceneIndex, nextDto);
             _currentDto = nextDto;
         }
 

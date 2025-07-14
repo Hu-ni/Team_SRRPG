@@ -7,6 +7,8 @@ using System.Xml.Serialization;
 
 namespace Team_SRRPG.Model
 {
+    // 데이터 저장될 그릇
+    // 최소 단위 *
     public class Dungeon
     {
         public int Id { get; private set; }
@@ -16,8 +18,6 @@ namespace Team_SRRPG.Model
 
         // 던전 클리어 보상
         public int Gold { get; private set; }
-        [XmlArray("ItemIds")]
-        [XmlArrayItem("ID")]
         public List<int> ItemIds { get; private set; }
     }
 }
