@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "시작화면",
+    "description": "시작화면입니다.",
+    "options": [
+      {
+        "text": "시작하기",
+        "commands": [
+          {
+            "type": "StartGame",
+            "args": {
+              "nextSceneId": 0
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

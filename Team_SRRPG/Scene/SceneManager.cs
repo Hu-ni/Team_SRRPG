@@ -3,61 +3,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team_SRRPG.DTO;
-using Team_SRRPG.Event;
+using Team_SRRPG.Model;
+using Team_SRRPG.Scene.Data;
+using Team_SRRPG.Scene.Factory;
 using Team_SRRPG.Scene.Interface;
+using Team_SRRPG.Service;
 
 namespace Team_SRRPG.Scene
 {
     public class SceneManager
     {
-        // 씬마다 나누면
-        // 각자 씬 만들고 필요한 필요한 커맨드 
-        // 기능마다 나눌꺼면 누구는 커맨드 제작
-        // 누구는 씬 제작, 누구는 인벤토리 제작하면서 
-        // PH_InventoryScene
-        // PH_Command
-        private readonly ISceneEventBus _eventBus;
-
         private IScene _currentScene;
-        private IEmptyDTO _currentDto;
 
-        public SceneManager(ISceneEventBus eventBus, int startSceneIndex, IEmptyDTO startDto)
+        public void Start(int initialIdx)
         {
-            _eventBus = eventBus;
-
-            // 초기 씬/DTO 설정
-            _currentDto = startDto;
-            _currentScene = SceneFactory.Instance.Create(startSceneIndex, _currentDto);
-
-            // 이벤트 구독
-            _eventBus.OnSceneChange += OnSceneChange;
+            var scene = CreateScene(initialIdx);
+            ChangeState(scene);
         }
 
-        /// <summary>
-        /// 이벤트가 발행되면 새 씬으로 교체
-        /// </summary>
-        private void OnSceneChange(int nextSceneIndex, IEmptyDTO nextDto)
+        private IScene CreateScene(int id)
         {
-            _currentScene = SceneFactory.Instance.Create(nextSceneIndex, nextDto);
-            _currentDto = nextDto;
+            var scene = SceneFactory.Instance.Create(id);
+            scene.SceneChangeRequested += OnSceneChange;
+            return scene;
         }
 
-        /// <summary>
-        /// 메인 루프
-        /// </summary>
-        public void Run()
+        private void ChangeState(IScene next)
         {
-            while (true)
+            // 이전 씬 정리
+            if(_currentScene != null && OnSceneChange != null)
             {
-                Console.Clear();
-                _currentScene.Render(_currentDto);
-
-                _currentScene.HandleInput();
-
-                // 종료 조건 예시: ExitScene이면 break
-                //if (_currentScene is ExitScene) break;
+                _currentScene.SceneChangeRequested -= OnSceneChange;
+                _currentScene.Exit();
             }
+
+            _currentScene = next;
+
+            _currentScene.Enter();
         }
+
+        private void OnSceneChange(int nextId)
+        {
+            // 새로운 씬 로드
+            ChangeState(CreateScene(nextId));
+        }
+
+        // Enter() -> 입력/출력 -> 씬 전환 이벤트 호출 -> Enter() 로 무한루프 흐름 되기 때문에 주석처리
+        ///// <summary>
+        ///// 메인 루프
+        ///// </summary>
+        //public void Run()
+        //{
+        //    while (true)
+        //    {
+        //        Console.Clear();
+        //        _current.Render();
+        //        _current.HandleInput();
+
+        //        // 종료 조건 예시: ExitScene이면 break
+        //        if (_current is ExitScene) break;
+        //    }
+        //}
     }
 }

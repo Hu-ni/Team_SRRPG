@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -17,10 +20,12 @@ namespace Team_SRRPG.Service
         private static readonly JsonSerializerOptions _options = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true
+            Converters = { new JsonStringEnumConverter() },
+            WriteIndented = true,
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
         };
 
-        public static T? Deserialize<T> (string filePath)
+        public static T Deserialize<T> (string filePath)
         {
             var fullPath = Path.Combine(BasePath, filePath);
             if (!File.Exists(fullPath))
@@ -28,7 +33,7 @@ namespace Team_SRRPG.Service
 
             var json = File.ReadAllText(fullPath);
 
-            return JsonSerializer.Deserialize<T>(json, _options);
+            return JsonSerializer.Deserialize<T>(json, _options) ?? throw new InvalidOperationException("데이터 로드 실패");
         }
 
         public static void Serialize<T>(T obj, string filePath)
