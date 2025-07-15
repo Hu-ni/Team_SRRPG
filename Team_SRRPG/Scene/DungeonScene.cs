@@ -53,14 +53,12 @@ namespace Team_SRRPG.Scene
         {
             int currentRoom = 0;
             int maxRooms = 3;
-
-            Console.Clear();
-            Console.WriteLine($"던전 입장: {dungeon.Name}");
-            Console.WriteLine(dungeon.Description);
-            Console.WriteLine($"난이도: {dungeon.Difficulty}");
-
             while (currentRoom < maxRooms)
             {
+                Console.Clear();
+                Console.WriteLine($"현재 던전: {dungeon.Name}");
+                Console.WriteLine(dungeon.Description);
+                Console.WriteLine($"난이도: {dungeon.Difficulty}");
                 Console.WriteLine(" __________   __________   __________");
                 Console.WriteLine("|          | |          | |          |");
 
@@ -74,7 +72,7 @@ namespace Team_SRRPG.Scene
                 Console.WriteLine();
                 Console.WriteLine("|__________|=|__________|=|__________|");
                 Console.WriteLine("\n\n던전에 오신걸 환영합니다");
-                Console.WriteLine("1.다음 방으로 이동하기\n2.상태보기");
+                Console.WriteLine("1.다음 방으로 이동하기\n2.상태보기\n3.아이템 사용하기");
                 Console.WriteLine("원하시는 행동을 입력해주세요.\n>>");
             }
 
