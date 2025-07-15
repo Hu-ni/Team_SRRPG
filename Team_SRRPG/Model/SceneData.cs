@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team_SRRPG.DTO;
 
 namespace Team_SRRPG.Model
 {
@@ -13,7 +12,7 @@ namespace Team_SRRPG.Model
         public string Title { get; set; }
         public string Description { get; set; }
         public List<int> Linked { get; set; }
-        public List<string> Menus { get; set; }
+        public List<OptionData> Options { get; set; }
 
         public SceneData()
         {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team_SRRPG.Event;
 using Team_SRRPG.Model;
 using Team_SRRPG.Scene.Interface;
 using Team_SRRPG.Service;
@@ -16,7 +15,7 @@ namespace Team_SRRPG.Scene
     public abstract class BaseScene : IScene
     {
         // 씬 전환 요청 이벤트
-        public event EventHandler<SceneChangeEventArgs> SceneChangeRequested;
+        public event Action<int> SceneChangeRequested;
 
         // JSON으로부터 로드된 씬 데이터
         protected SceneData Data { get; }
@@ -54,11 +53,11 @@ namespace Team_SRRPG.Scene
         /// 씬 전환을 외부에 알릴 때 사용.(ex: SceneManager)
         /// </summary>
         /// <param name="nextSceneId"></param>
-        protected void RequestSceneChange(int nextSceneId, IDictionary<string, object> parameters = null)
+        protected void RequestSceneChange(int nextSceneId)
         {
             // 씬 전환 요청이 들어오면 무한 루프 탈출
             _isRunning = false;
-            SceneChangeRequested?.Invoke(this, new SceneChangeEventArgs(nextSceneId,parameters));
+            SceneChangeRequested?.Invoke(nextSceneId);
         }
 
         public abstract void Render();

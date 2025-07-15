@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team_SRRPG.Event;
 using Team_SRRPG.Model;
 using Team_SRRPG.Scene.Data;
 using Team_SRRPG.Scene.Interface;

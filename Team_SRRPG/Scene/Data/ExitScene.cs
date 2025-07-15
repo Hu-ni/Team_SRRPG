@@ -1,21 +1,20 @@
-﻿using Team_SRRPG.Event;
-using Team_SRRPG.Model;
+﻿using Team_SRRPG.Model;
 using Team_SRRPG.Scene.Interface;
 
 namespace Team_SRRPG.Scene.Data
 {
-    public class ExitScene : IScene
+    public class ExitScene : BaseScene
     {
-        private SceneData _sceneData;
+        public ExitScene(SceneData data) : base(data)
+        {
+        }
 
-        public event EventHandler<SceneChangeEventArgs> SceneChangeRequested;
-
-        public void HandleInput()
+        public override void HandleInput()
         {
             throw new NotImplementedException();
         }
 
-        public void Render()
+        public override void Render()
         {
             throw new NotImplementedException();
         }

@@ -4,25 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team_SRRPG.Command.Interface;
-using Team_SRRPG.Event;
 
 namespace Team_SRRPG.Command.Scene
 {
-    public class ExitGameCommand : ICommand
+    public class ExitGameCommand : IGameCommand
     {
         public string Name => "종료하기";
-        private readonly Action<int> _onSceneChange;
 
         private readonly int _exitSceneId;
-        public ExitGameCommand(int exitSceneId, Action<int> onSceneChange)
+        public ExitGameCommand(int exitSceneId)
         {
             _exitSceneId = exitSceneId;
-            _onSceneChange = onSceneChange;
         }
 
-        public void Execute()
+        public int? Execute()
         {
-            _onSceneChange(_exitSceneId);
+            return _exitSceneId;
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Team_SRRPG.Event;
 
 namespace Team_SRRPG.Scene.Interface
 {
@@ -25,6 +24,6 @@ namespace Team_SRRPG.Scene.Interface
         /// Command가 결과를 EventBus로 전달한다.
         /// </summary>
         void HandleInput();
-        event EventHandler<SceneChangeEventArgs> SceneChangeRequested;
+        event Action<int> SceneChangeRequested;
     }
 }

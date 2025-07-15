@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team_SRRPG.Event;
 using Team_SRRPG.Model;
 using Team_SRRPG.Scene.Data;
 using Team_SRRPG.Scene.Factory;
@@ -43,10 +42,10 @@ namespace Team_SRRPG.Scene
             _currentScene.Enter();
         }
 
-        private void OnSceneChange(object? sender, SceneChangeEventArgs e)
+        private void OnSceneChange(int nextId)
         {
             // 새로운 씬 로드
-            ChangeState(CreateScene(e.NextSceneId));
+            ChangeState(CreateScene(nextId));
         }
 
         // Enter() -> 입력/출력 -> 씬 전환 이벤트 호출 -> Enter() 로 무한루프 흐름 되기 때문에 주석처리
