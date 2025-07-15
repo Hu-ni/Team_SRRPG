@@ -35,6 +35,10 @@ namespace Team_SRRPG.Scene.Factory
                     return new StartScene(data);
                 case 1:
                     return new ExitScene(data);
+                case 2:
+                    return new DungeonSelectScene(data); // 던전 선택 화면
+                case 3:
+                    return new DungeonScene(data); // 던전 씬
                 // 새 씬 추가 시 여기에 case 문으로 확장
                 default:
                     throw new ArgumentOutOfRangeException(

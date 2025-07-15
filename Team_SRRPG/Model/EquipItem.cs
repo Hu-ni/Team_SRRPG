@@ -9,6 +9,9 @@ namespace Team_SRRPG.Model
     // 장비 아이템
     public class EquipItem : Item
     {
-        //어떤 데이터가
+        public EquipItem(int id, string name, string description, int attack = 0, int defense = 0, int health = 0, int cost = 0, int luck = 0) 
+                    : base(id, name, description, attack, defense, health, cost, luck)
+                {
+                }
     }
 }

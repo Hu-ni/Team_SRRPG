@@ -1,0 +1,16 @@
+{
+  "Id": 2,
+  "Title": "던전 선택",
+  "Description": "입장할 던전을 선택하세요.",
+  "Options": [
+    {
+      "Text": "뒤로가기",
+      "Commands": [
+        {
+          "Type": "ChangeScene",
+          "Args": { "nextSceneId": 0 }
+        }
+      ]
+    }
+  ]
+}
