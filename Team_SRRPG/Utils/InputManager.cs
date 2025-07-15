@@ -1,11 +1,10 @@
-﻿using Spartdungeon.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Team_SRRPG.Service
+namespace Team_SRRPG.Utils
 {
     public class InputManager : Singleton<InputManager>
     {
@@ -14,7 +13,7 @@ namespace Team_SRRPG.Service
 
         public string ReadLine()
         {
-            if (isSelectedOptions) return Defines.ERROR_OPTIONS_INPUT.ToString();
+            if (isSelectedOptions) return ERROR_OPTIONS_INPUT.ToString();
 
             string? input = Console.ReadLine();
             if (input == null)
@@ -24,17 +23,17 @@ namespace Team_SRRPG.Service
 
         public int ReadLineInt()
         {
-            if(!isSelectedOptions) return Defines.ERROR_OPTIONS_INPUT;
+            if(!isSelectedOptions) return ERROR_OPTIONS_INPUT;
             int input;
             ViewHelper.PrintInput();
             if (int.TryParse(ReadLine(), out input))
                 return input;
-            return Defines.ERROR_INPUT_FORMATING;
+            return ERROR_INPUT_FORMATING;
         }
 
         public int ReadLineIntInRange(int min, int max)
         {
-            if(isSelectedOptions) return Defines.ERROR_OPTIONS_INPUT;
+            if(isSelectedOptions) return ERROR_OPTIONS_INPUT;
             
             int value;
             while (true)

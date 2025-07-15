@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Team_SRRPG.Service
+namespace Team_SRRPG.Resources
 {
     public static class Defines
     {
@@ -21,7 +21,7 @@ namespace Team_SRRPG.Service
         #endregion
 
         #region JSON Keyword
-        public const string JSON_NextSceneID = "nextSceneId";
+        public const string Json_NextSceneId = "nextSceneId";
         //public const string JSON_NextSceneID = "nextSceneId";
         //public const string JSON_NextSceneID = "nextSceneId";
         //public const string JSON_NextSceneID = "nextSceneId";

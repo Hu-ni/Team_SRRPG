@@ -1,10 +1,9 @@
-﻿global using static Team_SRRPG.Service.Defines;
+﻿global using static Team_SRRPG.Resources.Defines;
 using System.Threading.Channels;
 using Team_SRRPG.Command.Factory;
 using Team_SRRPG.Command.Scene;
 using Team_SRRPG.Model;
 using Team_SRRPG.Scene;
-using Team_SRRPG.Service;
 
 namespace Team_SRRPG
 {
@@ -52,7 +51,7 @@ namespace Team_SRRPG
             Random rnd = new Random();
 
             var repo = CommandRepository.Instance;
-            repo.Register(GameCommandType.StartGame, (scene, desc) =>
+            repo.Register(GameCommandType.Start, (scene, desc) =>
             {
                 //double chance = Convert.ToDouble(desc.Args["specialChance"]);
                 int nextSceneId = Convert.ToInt32(desc.Args["nextSceneId"]);

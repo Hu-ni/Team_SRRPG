@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Team_SRRPG.Service
+namespace Team_SRRPG.Model
 {
     public enum GameCommandType
     {
-        StartGame,              // StartGameCommand
-        EndGame,                // EndGameCommand
+        Start,              // StartGameCommand
+        End,                // EndGameCommand
 
     }
 }

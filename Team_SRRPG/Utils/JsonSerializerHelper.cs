@@ -10,7 +10,7 @@ using System.Text.Unicode;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Team_SRRPG.Service
+namespace Team_SRRPG.Utils
 {
     public static class JsonSerializerHelper
     {
@@ -47,7 +47,7 @@ namespace Team_SRRPG.Service
                 if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
                     Directory.CreateDirectory(dir);
 
-                File.WriteAllText(BasePath + filePath, text);
+                File.WriteAllText(fullPath, text);
             }
             catch (Exception exception)
             {

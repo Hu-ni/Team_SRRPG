@@ -6,11 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Team_SRRPG.Command.Interface;
-using Team_SRRPG.Command.Scene;
 using Team_SRRPG.Model;
 using Team_SRRPG.Scene;
 using Team_SRRPG.Scene.Interface;
-using Team_SRRPG.Service;
 
 namespace Team_SRRPG.Command.Factory
 {
