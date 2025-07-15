@@ -22,6 +22,7 @@ namespace Team_SRRPG.Model
             Hp = hp;
             Atk = atk;
             Def = def;
+            Spd = spd;
             Gold = gold;
             Xp = xp;
         }
