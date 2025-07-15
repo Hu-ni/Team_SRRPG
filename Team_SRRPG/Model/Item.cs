@@ -20,4 +20,24 @@ namespace Team_SRRPG.Model
             Cost = cost;
         }
     }
+    public class AttackItem : Item
+    {
+        public int Attack { get; private set; }
+
+        public AttackItem(int id, string name, string description, int cost, int attack)
+            : base(id, name, description, cost)
+        {
+            Attack = attack;
+        }
+    }
+    public class DefenseItem : Item
+    {
+        public int Defense { get; private set; }
+
+        public DefenseItem(int id, string name, string description, int cost, int defense)
+            : base(id, name, description, cost)
+        {
+            Defense = defense;
+        }
+    }
 }
