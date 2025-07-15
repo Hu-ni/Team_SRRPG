@@ -20,6 +20,14 @@ namespace Team_SRRPG.Service
         public const string DUNGEON_DATA_FILE = "\\Data\\dungeon.json";
         #endregion
 
+        #region JSON Keyword
+        public const string JSON_NextSceneID = "nextSceneId";
+        //public const string JSON_NextSceneID = "nextSceneId";
+        //public const string JSON_NextSceneID = "nextSceneId";
+        //public const string JSON_NextSceneID = "nextSceneId";
+
+        #endregion
+
         #region 확률
         public const double DEFAULT_PROB = 0.0;
         #endregion

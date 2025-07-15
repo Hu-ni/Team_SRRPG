@@ -11,7 +11,6 @@ namespace Team_SRRPG.Model
         public int Id {  get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<int> Linked { get; set; }
         public List<OptionData> Options { get; set; }
 
         public SceneData()
