@@ -16,11 +16,13 @@ namespace Team_SRRPG.Scene
     {
         
         private Dictionary<int, ICommand> _commands;
+        private Random _rand = new Random();
 
-        public StartScene(IEmptyDTO data)
+        public StartScene(IEmptyDTO data, Dictionary<int, ICommand> commands)
         { 
             StartSceneDTO dto = data as StartSceneDTO;
             base(dto);
+            _commands = commands;
         }
 
         public void Render(IEmptyDTO dto)
@@ -34,14 +36,45 @@ namespace Team_SRRPG.Scene
         {
             //InputManager.Instance.SelectOptionAsync(new List<string> { "시작하기", "종료하기" });
             int input = InputManager.Instance.ReadLineIntInRange(1, 2); // 입력을 받음.
+
             switch (input)
             {
                 case 1:
-                    //command.Execute();
-                    // 커맨드가 실행
+                    if (_rand.NextDouble() < 0.5f)
+                    {
+                        Console.WriteLine("게임 시작");
+                        if (_commands != null && _commands.ContainsKey(1))
+                        {
+                            _commands[1].Execute(null);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("게임 시작 실패");
+                        if (_commands != null && _commands.ContainsKey(2))
+                        {
+                            _commands[2].Execute(null);
+                        }
+                    }
                     break;
+
                 case 2:
-                    // 커맨드가 실행
+                    if (_rand.NextDouble() < 0.5f)
+                    {
+                        Console.WriteLine("게임 종료");
+                        if (_commands != null && _commands.Contains(2))
+                        {
+                            _commands[2].Execute(null);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("종료 실패 강제 시작");
+                        if (_commands != null && _commands.Contains(1))
+                        {
+                            _commands[1].Execute(null);
+                        }
+                    }
                     break;
             }
         }
