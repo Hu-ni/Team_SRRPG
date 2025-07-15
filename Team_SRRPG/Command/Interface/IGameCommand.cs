@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Team_SRRPG.Command.Interface
 {
-    public interface ICommand
+    public interface IGameCommand
     {
-        public void Execute();
+        public string Name {  get; }
+        public int? Execute();
+
     }
 }
