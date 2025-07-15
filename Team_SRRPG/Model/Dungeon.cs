@@ -38,6 +38,7 @@ namespace Team_SRRPG.Model
         {
             Dungeons = new List<Dungeon>();
             InitializeDungeon();
+            
         }
         private void InitializeDungeon()
         {

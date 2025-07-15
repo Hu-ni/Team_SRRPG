@@ -51,66 +51,33 @@ namespace Team_SRRPG.Scene
 
         private void RunDungeon(Dungeon dungeon)
         {
+            int currentRoom = 0;
+            int maxRooms = 3;
+
             Console.Clear();
-            Console.WriteLine($"Entering Dungeon: {dungeon.Name}");
+            Console.WriteLine($"던전 입장: {dungeon.Name}");
             Console.WriteLine(dungeon.Description);
-            Console.WriteLine($"Difficulty: {dungeon.Difficulty}");
-            Console.WriteLine("\nPress any key to continue...");
-            Console.ReadKey();
+            Console.WriteLine($"난이도: {dungeon.Difficulty}");
 
-            foreach (var monster in dungeon.Monsters)
+            while (currentRoom < maxRooms)
             {
-                Console.Clear();
-                Console.WriteLine($"\nA wild {monster.Name} appears!");
+                Console.WriteLine(" __________   __________   __________");
+                Console.WriteLine("|          | |          | |          |");
 
-                // Simple turn-based combat loop
-                while (monster.Hp > 0 && _player.Hp > 0)
+                for (int i = 0; i < maxRooms; i++)
                 {
-                    Console.WriteLine($"\nYour HP: {_player.Hp} | {monster.Name} HP: {monster.Hp}");
-                    Console.WriteLine($"You attack the {monster.Name}!");
-                    monster.Hp -= _player.Attack; // Player's attack logic
-                    Console.WriteLine($"{monster.Name} takes {_player.Attack} damage.");
-
-                    if (monster.Hp <= 0)
-                    {
-                        Console.WriteLine($"{monster.Name} defeated!");
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadKey();
-                        break;
-                    }
-
-                    Console.WriteLine($"{monster.Name} attacks you!");
-                    _player.Hp -= monster.Atk; // Monster's attack logic
-                    Console.WriteLine($"You take {monster.Atk} damage.");
-
-                    if (_player.Hp <= 0)
-                    {
-                        Console.WriteLine("\nYou were defeated!");
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadKey();
-                        // TODO: Add logic to handle player death (e.g., return to town)
-                        return;
-                    }
-                    
-                    Console.WriteLine("\nPress any key to continue to the next turn...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    if (i == currentRoom)
+                        Console.Write("|    O     |=");
+                    else
+                        Console.Write("|          |=");
                 }
+                Console.WriteLine();
+                Console.WriteLine("|__________|=|__________|=|__________|");
+                Console.WriteLine("\n\n던전에 오신걸 환영합니다");
+                Console.WriteLine("1.다음 방으로 이동하기\n2.상태보기");
+                Console.WriteLine("원하시는 행동을 입력해주세요.\n>>");
             }
 
-            Console.Clear();
-            Console.WriteLine($"\nDungeon Cleared! You earned {dungeon.Gold} Gold!");
-            _player.Gold += dungeon.Gold;
-
-            // Handle item rewards
-            foreach (int itemId in dungeon.ItemIds)
-            {
-                Console.WriteLine($"You received item with ID: {itemId}");
-                // You could fetch actual item object from item database here
-            }
-            
-            Console.WriteLine("\nPress any key to return to the dungeon entrance...");
-            Console.ReadKey();
         }
     }
 }
