@@ -22,7 +22,6 @@ namespace Team_SRRPG.Scene.Data
             Console.Clear();
             ViewHelper.PrintTitle(_dungeon.Name);
             Console.WriteLine(_dungeon.Description + "\n");
-
             Console.WriteLine(" __________   __________   __________");
             Console.WriteLine("|          | |          | |          |");
 
@@ -68,18 +67,11 @@ namespace Team_SRRPG.Scene.Data
                     //ShowStatus();
                     break;
 
-                case 0:
-                    Console.WriteLine("던전을 떠납니다...");
-                    Thread.Sleep(1000);
-                    RequestSceneChange(2); // back to DungeonSelectScene
-                    break;
-
                 default:
                     ViewHelper.PrintInvalidInput();
                     Thread.Sleep(1000);
                     break;
             }
         }
-
     }
 }
