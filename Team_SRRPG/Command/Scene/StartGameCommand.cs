@@ -14,21 +14,30 @@ namespace Team_SRRPG.Command.Scene
         private readonly Random _rng;
         private readonly double _chance;
         private readonly int _normalSceneId;
+        private readonly IGameCommand _startFailCommand
 
-        public StartGameCommand(Random rng, double chance, int normalSceneId)
+        public StartGameCommand(Random rng, double chance, int normalSceneId, IGameCommand startFailCommand)
         {
             _rng = rng;
             _chance = chance;
             _normalSceneId = normalSceneId;
+            _startFailCommand = startFailCommand;
         }
 
         public int? Execute()
         {
             // 확률 체크
-            if (_chance < _rng.NextDouble()) ;
-            // 또는 다른 로직 적용.
-            // ex) 플레이어 히든 직업 등등
-            return _normalSceneId;
+            if (_rng.NextDouble() < _chance)
+            {
+                Console.WriteLine("게임 시작");
+                return _normalSceneId;
+            }
+            else
+            {
+                Console.WriteLine("시작 실패 게임 종료");
+                _startFailCommand.Execute();
+                return null;
+            }
         }
     }
 }

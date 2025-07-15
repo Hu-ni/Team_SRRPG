@@ -11,15 +11,33 @@ namespace Team_SRRPG.Command.Scene
     {
         public string Name => "종료하기";
 
+        private readonly Random _rng;
+        private readonly double _chance;
+        private readonly int _normalSceneId;
+        private readonly IGameCommand _endFailCommand;
+
         private readonly int _exitSceneId;
-        public ExitGameCommand(int exitSceneId)
+        public ExitGameCommand(Random rng, double chance, int exitSceneId, IGameCommand endFailCommand)
         {
-            _exitSceneId = exitSceneId;
+            _rng = rng;
+            _chance = chance;
+            _exitSceneId = exitSceneId; 
+            _endFailCommand = endFailCommand;
         }
 
         public int? Execute()
         {
-            return _exitSceneId;
+            if (_rng.NextDouble() < _chance)
+            {
+                Console.WriteLine("게임 종료");
+                return _exitSceneId;
+            }
+            else
+            {
+                Console.WriteLine("종료 실패 강제 시작");
+                _endFailCommand.Execute();
+                return null;
+            }
         }
     }
 }
