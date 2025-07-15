@@ -20,7 +20,7 @@ namespace Team_SRRPG.Service
             WriteIndented = true
         };
 
-        public static T? Deserialize<T> (string filePath)
+        public static T Deserialize<T> (string filePath)
         {
             var fullPath = Path.Combine(BasePath, filePath);
             if (!File.Exists(fullPath))
@@ -28,7 +28,7 @@ namespace Team_SRRPG.Service
 
             var json = File.ReadAllText(fullPath);
 
-            return JsonSerializer.Deserialize<T>(json, _options);
+            return JsonSerializer.Deserialize<T>(json, _options) ?? throw new InvalidOperationException("데이터 로드 실패");
         }
 
         public static void Serialize<T>(T obj, string filePath)
