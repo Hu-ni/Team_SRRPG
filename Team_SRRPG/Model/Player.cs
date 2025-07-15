@@ -32,13 +32,24 @@ namespace Team_SRRPG.Model
             Attack = attack;
             Defense = defense;
         }
-        public int GetTotalAttack(Inventory inventory)
+        //인벤토리에서 장착한 아이템의 공격력 혹은 방어력과
+        //내 공격력 혹은 방어력의 합을 나타내는 토탈 스탯을 구현하는 메서드
+        Inventory inventory = new Inventory();
+        public int TotalAttack
         {
-            return Attack + inventory.GetTotalAttackBonus();
+            get
+            {
+                return Attack + inventory.Items.Where(item => item is AttackItem)
+                    .Sum(item => ((AttackItem)item).Attack);
+            }
         }
-        public int GetTotalDefense(Inventory inventory)
+        public int TotalDefense
         {
-            return Defense + inventory.GetTotalDefenseBonus();
+            get
+            {
+                return Defense + inventory.Items.Where(item => item is DefenseItem)
+                    .Sum(item => ((DefenseItem)item).Defense);
+            }
         }
     }
 }
